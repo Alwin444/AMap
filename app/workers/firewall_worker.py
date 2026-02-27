@@ -3,7 +3,7 @@ app/workers/firewall_worker.py
 
 A QThread worker that detects Web Application Firewalls (WAF) 
 or Network Firewalls.
-UPDATED: Adds simple 'presence' field (Yes/No) for UI simplicity.
+
 """
 
 from PyQt5.QtCore import QThread, pyqtSignal
@@ -47,7 +47,7 @@ class FirewallScanWorker(QThread):
         report = {
             "target": domain, 
             "waf": "None Detected", 
-            "presence": "No",   # Changed from 'type' to simple Yes/No logic
+            "presence": "No",   
             "status": "Scanning..."
         }
 
