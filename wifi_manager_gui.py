@@ -1,11 +1,6 @@
 """
 wifi_manager_gui.py
 
-A lightweight but visually richer PyQt5 GUI for the WiFi Manager MainProject.
-This variant merges all 11 feature pages with a "complex" demo style
-to impress judges. It uses summary cards, a live event log, a status bar,
-and a global timer to appear dynamic and content-rich
-while remaining extremely low-resource.
 
 This version contains NO simulators or demo data. It is a clean scaffold.
 
@@ -16,7 +11,7 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtCore import pyqtSignal, QTimer
 import sys, time, random
 
-# --- Lighter "Cyber" Gradient Stylesheet (from your example) ---
+# --- Lighter "Cyber" Gradient Stylesheet ---
 CYBER_STYLESHEET = r"""
 QWidget {
     background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
@@ -188,7 +183,7 @@ class GUISignals(QtCore.QObject):
     start_wifi_scan = pyqtSignal()
     log = pyqtSignal(str, str) # level, message
 
-# --- NO SIMULATORS IN THIS VERSION ---
+
 
 # --- Utility small widget: summary card ---
 class SummaryCard(QtWidgets.QFrame):
@@ -360,23 +355,19 @@ class DevicesPage(BasePage):
         self.card_count.set_value('0')
         self.card_last.set_value('N/A')
         
-        # --- TODO: Wire to real worker ---
-        # self.signals.start_arp_scan.emit(iface) 
+        
         self.signals.log.emit('info', f'ARP scan started on {iface}...')
-        # Your worker should connect to:
-        # self.add_device
-        # self.scan_finished
+        
 
     def _stop_scan(self):
         self.scan_btn.setEnabled(True)
         self.stop_btn.setEnabled(False)
-        # --- TODO: Wire to real worker ---
-        # self.signals.stop_arp_scan.emit() 
+      
         self.signals.log.emit('warn', 'ARP scan stopped by user.')
 
     def add_device(self, dev: dict):
         """Public method for worker to add/update device row."""
-        # TODO: Implement logic to find_by_ip and update, or add new
+      
         r = self.table.rowCount()
         self.table.insertRow(r)
         self.table.setItem(r,0, QtWidgets.QTableWidgetItem(dev['ip']))
@@ -410,7 +401,7 @@ class DevicesPage(BasePage):
         
         target_ip = self.lbl_ip.text()
         self.signals.log.emit('info', f'Port scan requested for {target_ip}...')
-        # This signal can be caught by MainWindow to switch tabs and fill data
+        
         self.signals.start_port_scan.emit(target_ip, "22,80,443")
 
 # --- 3. PortsPage ---
@@ -467,10 +458,7 @@ class PortsPage(BasePage):
         self.scan_btn.setEnabled(False)
         self.signals.log.emit('info', f"Starting port scan on {target}...")
 
-        # --- TODO: Wire to real worker ---
-        # self.signals.start_port_scan.emit(target, ports_str)
-        # Note: The 'ports_page.add_result' and 'ports_page.scan_finished'
-        # methods below are the slots your worker should connect to.
+        
 
     def add_result(self, res: dict):
         """Public method for worker to add a port result."""
@@ -522,7 +510,7 @@ class TrafficPage(BasePage):
         ctrl_layout.addWidget(self.stop_btn)
         self.get_layout().addLayout(ctrl_layout)
         
-        # --- Protocol Stats (Low-fi) ---
+        # --- Protocol Stats ---
         stats_layout = QtWidgets.QHBoxLayout()
         self.proto_tcp = QtWidgets.QProgressBar(); self.proto_tcp.setFormat('TCP: %v')
         self.proto_udp = QtWidgets.QProgressBar(); self.proto_udp.setFormat('UDP: %v')
@@ -534,7 +522,7 @@ class TrafficPage(BasePage):
             stats_layout.addWidget(w)
         self.get_layout().addLayout(stats_layout)
 
-        # --- Main Splitter (Wireshark Style) ---
+        # --- Main Splitter  ---
         main_splitter = QtWidgets.QSplitter(QtCore.Qt.Vertical)
         
         self.table = QtWidgets.QTableWidget(0, 6)
@@ -589,17 +577,12 @@ class TrafficPage(BasePage):
         self.stop_btn.setEnabled(True)
         self.signals.log.emit('info', f"Capture started on {iface}...")
         
-        # --- TODO: Wire to real worker ---
-        # self.signals.start_capture.emit(iface, bpf)
-        # Your worker should connect to 'add_packet_row' and 'stop_capture_finished'
+        
 
     def _stop(self):
         """Called by the Stop button."""
         self.signals.log.emit('warn', "Capture stop requested by user.")
-        # --- TODO: Wire to real worker ---
-        # self.signals.stop_capture.emit()
-        
-        # For demo, we just call the finished slot
+      
         self.stop_capture_finished() 
 
     def stop_capture_finished(self):
@@ -630,7 +613,7 @@ class TrafficPage(BasePage):
             self._counts['Other'] += 1
         
         total = sum(self._counts.values()) or 1
-        # TODO: This logic is slow. Better to batch updates.
+       .
         self.proto_tcp.setValue(int(self._counts['TCP'] / total * 100))
         self.proto_udp.setValue(int(self._counts['UDP'] / total * 100))
         self.proto_icmp.setValue(int(self._counts['ICMP'] / total * 100))
@@ -641,7 +624,7 @@ class TrafficPage(BasePage):
         self.proto_other.setFormat(f"Other: {self._counts['Other']}")
 
     def _select_packet(self):
-        # TODO: Add logic to show real packet details
+      
         self.details_tree.clear()
         self.details_tree.addTopLevelItem(QtWidgets.QTreeWidgetItem(["Packet details..."]))
         self.bytes_text.setText("Packet bytes...")
@@ -704,14 +687,7 @@ class PcapImportPage(BasePage):
         self.export_btn.clicked.connect(self._export)
 
     def _open_file(self):
-        # --- TODO: Implement real file dialog ---
-        # options = QtWidgets.QFileDialog.Options()
-        # fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self,"Open PCAP File", "","PCAP Files (*.pcap *.pcapng);;All Files (*)", options=options)
-        # if fileName:
-        #     self.file_label.setText(fileName)
-        #     self.signals.log.emit('info', f"Loading {fileName}...")
-        #     self.table.setRowCount(0)
-        #     # --- TODO: Start worker to read pcap ---
+       
         
         self.signals.log.emit('info', "Open file clicked (no logic).")
         self.file_label.setText("dummy.pcap (not loaded)")
@@ -760,11 +736,7 @@ class StatsPage(BasePage):
         
         self.get_layout().addLayout(main_layout)
 
-        # --- Demo Timer (REMOVED) ---
-        # self.timer = QTimer(self)
-        # self.timer.setInterval(1000) # Update every second
-        # self.timer.timeout.connect(self._update_demo_stats)
-        # self.timer.start()
+        
 
     def update_stats(self, bw_in, bw_out, total_data, talkers):
         """Public method for worker to update stats."""
@@ -827,16 +799,14 @@ class SpeedTestPage(BasePage):
         self.run_btn.setEnabled(False)
         self.status_label.setText("Testing... (connect worker)")
         
-        # --- TODO: Wire to real worker ---
-        # self.signals.start_speed_test.emit()
-        # Your worker should connect to 'update_progress' and 'test_finished'
+    
 
     def update_progress(self, test_type: str, value: float, current_speed: float = 0):
         """Public method for worker to update progress."""
         if test_type == 'ping':
             self.card_ping.set_value(f"{value:.2f} ms")
         elif test_type == 'download':
-            self.down_progress.setValue(int(value)) # Assume value is 0-100
+            self.down_progress.setValue(int(value)) 
             self.card_down.set_value(f"{current_speed:.2f} Mbps")
         elif test_type == 'upload':
             self.up_progress.setValue(int(value))
@@ -884,8 +854,7 @@ class DNSLookupPage(BasePage):
         rectype = self.record_type.currentText()
         self.signals.log.emit('info', f"Running DNS lookup for {domain} ({rectype})...")
         
-        # --- TODO: Wire to real worker ---
-        # self.signals.start_dns_lookup.emit(domain, rectype)
+  
         self.results_text.setText(f";; Querying {domain} for {rectype}...")
         
     def show_results(self, text: str):
@@ -915,14 +884,13 @@ class RouterAdminPage(BasePage):
         self.open_btn.clicked.connect(self._open_gateway)
         
     def _open_gateway(self):
-        # --- TODO: Add real logic ---
+      
         gateway_ip = self.card_gw.value_label.text()
         if gateway_ip == 'N/A':
             self.signals.log.emit('error', "Gateway IP not found.")
             return
         self.signals.log.emit('info', f"Opening http://{gateway_ip} in browser...")
-        # import webbrowser
-        # webbrowser.open(f'http://{gateway_ip}')
+       
         
     def set_info(self, ip: str, model: str):
         """Public method to update router info."""
@@ -956,10 +924,6 @@ class UptimePage(BasePage):
         d, h = divmod(h, 24)
         self.card_uptime.set_value(f"{d}d {h}h {m}m {s}s")
         
-        # --- TODO: Update with real data ---
-        # self.card_iface.set_value("eth0")
-        # self.card_status.set_value("Connected")
-        # self.card_start.set_value(...)
 
 
 # --- 11. WifiScannerPage ---
@@ -996,10 +960,9 @@ class WifiScannerPage(BasePage):
         self.card_found.set_value("0")
         self.card_best.set_value("--- dBm")
         
-        # --- TODO: Wire to real worker ---
-        # self.signals.start_wifi_scan.emit()
+        
         self.signals.log.emit('info', "Starting Wi-Fi scan...")
-        # Your worker should connect to 'add_network' and 'scan_finished'
+        
 
     def add_network(self, net: dict, best_signal: int):
         """Public method for worker to add a network."""
@@ -1162,13 +1125,7 @@ class MainWindow(QtWidgets.QMainWindow):
         uptime_s = int(time.time() - self.start_time)
         self.status_uptime.setText(f"Uptime: {uptime_s}s")
         
-        # --- TODO: Update packet counter from real sniffer worker ---
-        # self.status_packets.setText(f"Packets: {self.packet_counter}")
         
-        # Update Uptime Page (REMOVED - This was demo data)
-        # self.uptime_page.update_uptime(self.start_time)
-        
-        # Add a fake log message every few seconds
         if uptime_s % 30 == 0:
             self.signals.log.emit('debug', "System poll...")
             
@@ -1200,13 +1157,10 @@ class MainWindow(QtWidgets.QMainWindow):
     def _stop_all_tasks(self):
         """Stops all running tasks."""
         self.signals.log.emit('warn', "STOP ALL tasks requested!")
-        # --- TODO: Wire to real workers ---
+       
         self.devices_page._stop_scan()
         self.traffic_page._stop()
-        # if hasattr(self.ports_page, '_sim') and self.ports_page._sim: # Stop demo port scan
-        #      self.ports_page._sim.stop()
-        # if hasattr(self.wifi_page, '_sim') and self.wifi_page._sim: # Stop demo wifi scan
-        #      self.wifi_page._sim.stop()
+       
         
     def closeEvent(self, event):
         self.signals.log.emit('info', "Shutting down...")
