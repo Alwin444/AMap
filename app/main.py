@@ -26,7 +26,7 @@ def run_app():
         sys.exit(app.exec_())
     except Exception as e:
         print(f"Error launching main window: {e}")
-        # TODO: Add logging here
+        # TODO: Add logging here (I have not included it)
         sys.exit(1)
 
 if __name__ == '__main__':
