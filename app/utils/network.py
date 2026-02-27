@@ -51,7 +51,7 @@ def get_local_ip(iface=None):
             s.connect(("8.8.8.8", 80)) 
             return s.getsockname()[0]
     except Exception as e:
-        # logger.debug(f"Could not determine local IP: {e}") 
+
         return "127.0.0.1"
 
 def get_default_gateway():
@@ -158,11 +158,11 @@ def get_arp_mac(ip):
     try:
         if os.path.exists("/proc/net/arp"):
             with open("/proc/net/arp", "r") as f:
-                # Skip header
+          
                 next(f)
                 for line in f:
                     parts = line.split()
-                    # IP address is at index 0, MAC is at index 3
+                    
                     if len(parts) >= 4 and parts[0] == ip:
                         mac = parts[3]
                         if mac != "00:00:00:00:00:00":
