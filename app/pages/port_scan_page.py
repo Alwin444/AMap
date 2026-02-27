@@ -2,7 +2,7 @@
 app/pages/port_scan_page.py
 
 The UI for the Port Scanner.
-FIXED: Added 'Sl. No' column to clearly show row count vs port number.
+
 """
 
 from PyQt5 import QtWidgets, QtCore, QtGui
@@ -52,7 +52,7 @@ class PortsPage(BasePage):
         self.get_layout().addLayout(card_layout)
 
         # --- Results Table ---
-        # Changed to 5 columns to include Sl. No
+    
         self.table = QtWidgets.QTableWidget(0, 5)
         self.table.setHorizontalHeaderLabels(["SI No.", "Host", "Port", "Status", "Service/Banner"])
         self.table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
@@ -134,7 +134,7 @@ class PortsPage(BasePage):
     def _apply_filter_to_row(self, row):
         """Helper to hide a specific row if it doesn't match the filter."""
         if self.filter_check.isChecked():
-            # Status is now at column index 3
+          
             status_item = self.table.item(row, 3)
             if status_item and status_item.text() != "Open":
                 self.table.setRowHidden(row, True)
