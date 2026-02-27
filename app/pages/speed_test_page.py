@@ -2,7 +2,7 @@
 app/pages/speed_test_page.py
 
 The UI for Speed Test and Router Admin.
-Refined layout: Larger button, prominent progress bars, aligned router section.
+
 """
 
 from PyQt5 import QtWidgets, QtCore, QtGui
@@ -59,7 +59,7 @@ class SpeedTestPage(BasePage):
         self.get_layout().addLayout(card_layout)
 
         # --- 3. Progress Bars ---
-        # Use a GroupBox to contain them nicely
+        
         progress_group = QtWidgets.QGroupBox("Test Progress")
         progress_group.setStyleSheet("QGroupBox { font-weight: bold; font-size: 11pt; border: none; }")
         progress_layout = QtWidgets.QFormLayout()
@@ -101,7 +101,7 @@ class SpeedTestPage(BasePage):
         self.card_model.setMinimumHeight(90)
         
         self.open_admin_btn = QtWidgets.QPushButton("Open Router Admin")
-        self.open_admin_btn.setMinimumHeight(90) # Match card height
+        self.open_admin_btn.setMinimumHeight(90) 
         self.open_admin_btn.setStyleSheet("""
             QPushButton { 
                 font-size: 11pt; 
