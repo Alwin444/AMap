@@ -38,7 +38,7 @@ class DNSLookupPage(BasePage):
         ctrl_layout.addWidget(self.domain_input)
         
         self.record_type = QtWidgets.QComboBox()
-        # Added 'ALL' option
+       
         self.record_type.addItems(["A", "AAAA", "MX", "NS", "TXT", "ALL"])
         self.record_type.setMinimumHeight(35)
         self.record_type.setMinimumWidth(100)
@@ -59,8 +59,7 @@ class DNSLookupPage(BasePage):
             QPushButton:disabled { background-color: #555; }
         """)
         ctrl_layout.addWidget(self.lookup_btn)
-        
-        # ctrl_layout.addStretch() # Stretch handled by input field mostly
+    
         self.get_layout().addLayout(ctrl_layout)
         
         # --- Results Area ---
