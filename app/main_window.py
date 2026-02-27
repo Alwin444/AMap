@@ -1,7 +1,7 @@
 """
 app/main_window.py
 Integrates features including Traceroute, SSL, WHOIS.
-Updated: Removed MAC Spoofer.
+
 """
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtCore import pyqtSignal, QTimer
@@ -21,7 +21,7 @@ from app.pages.firewall_page import FirewallPage
 from app.pages.traceroute_page import TraceroutePage
 from app.pages.ssl_page import SSLPage
 from app.pages.whois_page import WhoisPage
-# Removed MacPage import
+
 from app.pages.subdomain_page import SubdomainPage
 
 # --- Backend Imports ---
@@ -37,12 +37,12 @@ from app.workers.wireless_scan import WifiScanWorker
 from app.workers.firewall_worker import FirewallScanWorker
 from app.workers.dns_worker import DNSLookupWorker
 from app.workers.traceroute_worker import TracerouteWorker
-# Removed MacSpoofWorker import
+
 from app.workers.ssl_worker import SSLWorker
 from app.workers.whois_worker import WhoisWorker
 from app.workers.subdomain_worker import SubdomainWorker
 
-# --- Stylesheet (Keep existing) ---
+# --- Stylesheet  ---
 CYBER_STYLESHEET = r"""
 QWidget { background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #071028, stop:0.5 #0f2a3a, stop:1 #1b3b4d); color: #e6f7ff; font-family: 'Segoe UI', 'Arial'; font-size: 10pt; }
 QMainWindow { background: transparent; }
@@ -121,7 +121,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.firewall_worker = None
         self.dns_worker = None
         self.traceroute_worker = None 
-        # self.mac_worker = None # REMOVED
+        
         self.ssl_worker = None 
         self.whois_worker = None 
         self.subdomain_worker = None
@@ -149,7 +149,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.dns_page = DNSLookupPage(self.signals)
         self.firewall_page = FirewallPage(self.signals)
         self.traceroute_page = TraceroutePage(self.signals)
-        # self.mac_page = MacPage(self.signals) # REMOVED
+        
         self.ssl_page = SSLPage(self.signals) 
         self.whois_page = WhoisPage(self.signals) 
         self.subdomain_page = SubdomainPage(self.signals) 
@@ -161,7 +161,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ssl_page.start_scan.connect(self._handle_ssl_start)
         self.whois_page.start_lookup.connect(self._handle_whois_start)
         self.subdomain_page.start_scan_signal.connect(self._handle_subdomain_start)
-        # Mac signal removed
+        
 
     def _build_ui(self):
         self.toolbar = self.addToolBar("Quick Actions")
@@ -192,7 +192,7 @@ class MainWindow(QtWidgets.QMainWindow):
         h.addWidget(self.stack)
         self.setCentralWidget(central)
 
-        # Add pages to stack (Removed mac_page)
+        # Add pages to stack 
         for p in [self.info_page, self.devices_page, self.ports_page, self.traffic_page, 
                   self.pcap_page, self.stats_page, self.speed_page, self.wifi_page, 
                   self.dns_page, self.firewall_page, self.traceroute_page,
@@ -235,7 +235,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self._add_nav_item("LAN Devices", style.standardIcon(QtWidgets.QStyle.SP_DriveNetIcon), self.devices_page)
         self._add_nav_item("Port Scanner", style.standardIcon(QtWidgets.QStyle.SP_FileDialogDetailedView), self.ports_page)
         self._add_nav_item("Traceroute", style.standardIcon(QtWidgets.QStyle.SP_ArrowRight), self.traceroute_page) 
-        # self._add_nav_item("MAC Spoofer", ...) # REMOVED
+        
         self._add_nav_item("Packet Sniffer", style.standardIcon(QtWidgets.QStyle.SP_FileDialogListView), self.traffic_page)
         self._add_nav_item("PCAP Analyzer", style.standardIcon(QtWidgets.QStyle.SP_FileIcon), self.pcap_page)
         self._add_nav_item("Network Stats", style.standardIcon(QtWidgets.QStyle.SP_ArrowUp), self.stats_page)
@@ -308,7 +308,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.traceroute_worker.error_occurred.connect(lambda e: self.signals.log.emit('error', e))
         self.traceroute_worker.start()
 
-    # _handle_mac_spoof REMOVED
+   
         
     def _handle_ssl_start(self, domain):
         if self.ssl_worker and self.ssl_worker.isRunning(): return
@@ -418,7 +418,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def closeEvent(self, event):
         # Stop all workers
-        # mac_worker removed
         for w in [self.arp_worker, self.capture_worker, self.port_worker, self.ip_worker, self.stats_worker, self.speed_worker, self.wifi_worker, self.firewall_worker, self.dns_worker, self.traceroute_worker, self.subdomain_worker, self.ssl_worker, self.whois_worker]:
             if w: w.terminate()
         event.accept()
