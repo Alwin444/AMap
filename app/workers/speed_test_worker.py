@@ -2,7 +2,7 @@
 app/workers/speed_test_worker.py
 
 Runs internet speed test using speedtest-cli library in a background thread.
-FIXED: Added secure=True to prevent HTTP 403 Forbidden errors.
+
 """
 
 from PyQt5.QtCore import QThread, pyqtSignal
@@ -30,7 +30,7 @@ class SpeedTestWorker(QThread):
         results = {'ping': 0.0, 'download': 0.0, 'upload': 0.0}
         
         try:
-            # FIX: Use secure=True to force HTTPS. 
+            # Use secure=True to force HTTPS. 
             # This bypasses the 403 Forbidden error on the config URL.
             st = speedtest.Speedtest(secure=True)
             
