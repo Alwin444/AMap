@@ -3,7 +3,7 @@ app/workers/port_scan_worker.py
 
 A QThread worker that performs a TCP Connect scan on a target IP.
 Checks a list of ports to see if they are open.
-FIXED: Improved banner grabbing and standard service name lookup.
+
 """
 
 from PyQt5.QtCore import QThread, pyqtSignal
