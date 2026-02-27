@@ -496,7 +496,7 @@ class TrafficPage(BasePage):
         # --- Controls ---
         ctrl_layout = QtWidgets.QHBoxLayout()
         ctrl_layout.addWidget(QtWidgets.QLabel("Interface:"))
-        self.iface = QtWidgets.QLineEdit("eth0") # TODO: Populate dynamically
+        self.iface = QtWidgets.QLineEdit("eth0") 
         self.iface.setFixedWidth(100)
         ctrl_layout.addWidget(self.iface)
         ctrl_layout.addWidget(QtWidgets.QLabel("BPF Filter:"))
@@ -694,10 +694,10 @@ class PcapImportPage(BasePage):
 
 
     def _export(self):
-        # --- TODO: Implement real export logic ---
+       
         self.signals.log.emit('info', "Export to CSV clicked (no logic).")
 
-# --- 6. StatsPage (Demo Graph) ---
+# --- 6. StatsPage ---
 class StatsPage(BasePage):
     def __init__(self, signals: GUISignals):
         super().__init__("Real-Time Network Statistics")
