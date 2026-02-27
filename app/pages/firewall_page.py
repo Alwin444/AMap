@@ -3,7 +3,7 @@ app/pages/firewall_page.py
 
 UI for the Firewall & WAF Detector.
 Part of the 'Web Play' suite.
-FIXED: Shows 'Firewall Presence' (Yes/No) with color coding.
+
 """
 
 from PyQt5 import QtWidgets, QtCore
@@ -33,7 +33,7 @@ class FirewallPage(BasePage):
         card_layout = QtWidgets.QHBoxLayout()
         self.card_status = SummaryCard("Connection Status", "Idle")
         
-        # Renamed from "Firewall Type" to "Firewall Presence" for clarity
+       
         self.card_presence = SummaryCard("Firewall Presence", "---")
         
         self.card_waf = SummaryCard("WAF Vendor", "---")
@@ -76,7 +76,7 @@ class FirewallPage(BasePage):
         
         self.card_status.set_value(report.get("status", "Unknown"))
         
-        # Display Yes/No for presence
+      
         presence = report.get("presence", "Unknown")
         self.card_presence.set_value(presence)
         
