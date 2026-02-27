@@ -76,8 +76,8 @@ class CaptureWorker(QThread):
                 'proto': "Unknown",
                 'info': packet.summary(),
                 'payload': "",
-                'alert': None, # New field for anomalies
-                'color': None  # New field for UI coloring
+                'alert': None, 
+                'color': None  
             }
 
             # 2. Layer Parsing
@@ -93,8 +93,8 @@ class CaptureWorker(QThread):
                 pkt_info['src'] = packet['ARP'].psrc
                 pkt_info['dst'] = packet['ARP'].pdst
                 pkt_info['proto'] = "ARP"
-                pkt_info['color'] = "#ffebcd" # Blanched Almond (Light Orange)
-
+                pkt_info['color'] = "#ffebcd" 
+                
             # 3. Protocol Refinement & Anomaly Detection
             if packet.haslayer('TCP'): 
                 pkt_info['proto'] = 'TCP'
