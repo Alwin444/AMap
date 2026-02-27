@@ -2,7 +2,7 @@
 app/workers/wireless_scan.py
 
 A QThread worker that scans for available Wi-Fi networks using 'nmcli'.
-FIXED: Explicitly checks if a Wi-Fi adapter is present before scanning to ensure alerts trigger.
+
 """
 
 from PyQt5.QtCore import QThread, pyqtSignal
