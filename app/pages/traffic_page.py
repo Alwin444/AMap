@@ -2,9 +2,7 @@
 app/pages/traffic_page.py
 
 The UI for the Packet Sniffer.
-FIXES:
-- Smart Search: Prioritizes Protocol column if search matches a known protocol name.
-- Prevents "TCP" search matching "UDP" packets that have "tcp" in their info text.
+
 """
 
 from PyQt5 import QtWidgets, QtCore, QtGui
@@ -60,7 +58,6 @@ class TrafficPage(BasePage):
         # --- Main Splitter ---
         main_splitter = QtWidgets.QSplitter(QtCore.Qt.Vertical)
         
-        # Added "Alert" column
         self.table = QtWidgets.QTableWidget(0, 7)
         self.table.setHorizontalHeaderLabels(["No", "Time", "Source", "Destination", "Protocol", "Info", "Alert"])
         self.table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
@@ -105,7 +102,7 @@ class TrafficPage(BasePage):
         self.table.itemSelectionChanged.connect(self._select_packet)
         self.search_input.textChanged.connect(self._filter_table)
         
-        # Initial Interface Populate
+        
         self._refresh_interfaces()
 
     def _refresh_interfaces(self):
@@ -174,7 +171,7 @@ class TrafficPage(BasePage):
         for i, item in enumerate(items):
             self.table.setItem(r, i, item)
         
-        # Apply current filter immediately
+       
         self._filter_row(r)
 
         if r > 1000: 
