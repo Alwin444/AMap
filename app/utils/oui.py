@@ -22,14 +22,14 @@ class OuiLookup:
 
     def _load_database(self):
         """Loads the OUI CSV into a dictionary."""
-        # Use abspath to ensure we find the file regardless of execution directory
+
         current_file = os.path.abspath(__file__)
         
         # Directory traversal:
         # wifi_manager/app/utils/oui.py (current_file)
-        #  -> wifi_manager/app/utils (dirname)
-        #  -> wifi_manager/app (dirname)
-        #  -> wifi_manager (dirname)
+        #  -> AMap/app/utils (dirname)
+        #  -> AMap/app (dirname)
+        #  -> AMap (dirname)
         base_dir = os.path.dirname(os.path.dirname(os.path.dirname(current_file)))
         
         csv_path = os.path.join(base_dir, 'data', 'oui_sample.csv')
