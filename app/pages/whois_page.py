@@ -2,7 +2,7 @@
 app/pages/whois_page.py
 
 The UI for Domain WHOIS Lookup.
-FIXED: Added missing pyqtSignal import.
+
 Features: Professional layout, sized-up controls.
 """
 
