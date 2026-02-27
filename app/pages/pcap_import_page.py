@@ -27,14 +27,14 @@ class PcapImportPage(BasePage):
         ctrl_layout.addWidget(self.open_btn)
         
         self.file_label = QtWidgets.QLabel("No file loaded.")
-        # Ellide text if too long
+     
         self.file_label.setStyleSheet("color: #888;")
         ctrl_layout.addWidget(self.file_label)
         
         ctrl_layout.addStretch()
         
         self.export_btn = QtWidgets.QPushButton("Export to CSV")
-        self.export_btn.setEnabled(False) # Disabled until data loaded
+        self.export_btn.setEnabled(False) 
         ctrl_layout.addWidget(self.export_btn)
         
         self.get_layout().addLayout(ctrl_layout)
@@ -54,7 +54,7 @@ class PcapImportPage(BasePage):
         
         bottom_splitter = QtWidgets.QSplitter(QtCore.Qt.Horizontal)
         
-        # Details Tree
+        
         details_group = QtWidgets.QGroupBox("Packet Details")
         details_layout = QtWidgets.QVBoxLayout()
         self.details_tree = QtWidgets.QTreeWidget()
@@ -87,7 +87,7 @@ class PcapImportPage(BasePage):
 
     def _open_file(self):
         options = QtWidgets.QFileDialog.Options()
-        # Start in 'data' directory if it exists
+       
         start_dir = "data" if os.path.exists("data") else ""
         
         file_path, _ = QtWidgets.QFileDialog.getOpenFileName(
