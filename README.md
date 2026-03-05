@@ -8,8 +8,8 @@ A sleek, GUI-driven **Network Mapping and Analysis Desktop Application** built w
 
 ### 🔍 Network Analysis
 - ARP / IP Device Discovery  
-- Port Scanning  
-- WiFi Scanning  
+- Port Scanning
+- Speed Test  
 - Real-time Traffic Monitoring  
 
 ### 🌐 Web Intelligence
@@ -34,11 +34,12 @@ A sleek, GUI-driven **Network Mapping and Analysis Desktop Application** built w
 
 ---
 
-## 📦 Installation
+## 📦 Installation(Currently for Linux)
 
 ### 1️⃣ Clone the Repository
 
 ```bash
 git clone https://github.com/Alwin444/AMap.git
 cd AMap
+
 
