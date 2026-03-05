@@ -34,12 +34,13 @@ A sleek, GUI-driven **Network Mapping and Analysis Desktop Application** built w
 
 ---
 
-## 📦 Installation(Currently for Linux)
+## 📦 Installation(Linux)
 
 ### 1️⃣ Clone the Repository
 
 ```bash
 git clone https://github.com/Alwin444/AMap.git
 cd AMap
+
 
 
