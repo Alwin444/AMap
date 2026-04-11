@@ -1,6 +1,6 @@
 # AMap
 
-A sleek, GUI-driven **Network Mapping and Analysis Desktop Application** built with **Python (PySide6)**.
+A sleek, GUI-driven **Network and Web Analysis Desktop Application** built with **Python**.
 
 ---
 
