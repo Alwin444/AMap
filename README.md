@@ -28,9 +28,8 @@ A sleek, GUI-driven **Network Mapping and Analysis Desktop Application** built w
 ## 🖥️ Tech Stack
 
 - Python 3.x  
-- PySide6 (Qt for Python)  
-- Scapy (Packet Analysis)  
-- Standard Networking Libraries  
+- PyQT5 (GUI Framework) 
+- Scapy (Libarary for packet based operation)  
 
 ---
 
