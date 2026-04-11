@@ -19,8 +19,6 @@ A sleek, GUI-driven **Network and Web Analysis Desktop Application** built with 
 - Traceroute  
 
 
----
-
 ## 🖥️ Tech Stack
 
 - Python 3.x  
