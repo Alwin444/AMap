@@ -25,7 +25,6 @@ A sleek, GUI-driven **Network and Web Analysis Desktop Application** built with 
 - PyQT5 (GUI Framework) 
 - Scapy (Libarary for packet based operation)  
 
----
 
 ## 📦 Installation(Linux)
 
