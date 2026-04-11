@@ -18,10 +18,6 @@ A sleek, GUI-driven **Network and Web Analysis Desktop Application** built with 
 - SSL Certificate Checker  
 - Traceroute  
 
-### 🛠 Utilities
-- PCAP Import / Export  
-- Internet Speed Test  
-- System Uptime Dashboard  
 
 ---
 
